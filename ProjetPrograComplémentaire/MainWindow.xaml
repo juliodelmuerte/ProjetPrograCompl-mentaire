@@ -5,8 +5,73 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetPrograComplémentaire"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Envoi d'e-mail" Height="600" Width="820" WindowStartupLocation="CenterScreen">
+    <Grid Margin="16" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Bandeau de config -->
+        <StackPanel Orientation="Horizontal" Margin="0 0 0 12" VerticalAlignment="Top" >
+            <TextBlock Text="Fournisseur :" VerticalAlignment="Center" Margin="0 0 8 0"/>
+            <ComboBox x:Name="cmbProvider" Width="180" SelectionChanged="cmbProvider_SelectionChanged">
+                <ComboBoxItem Content="Gmail" />
+                <ComboBoxItem Content="Outlook.com / Hotmail" />
+                <ComboBoxItem Content="Autre (manuel)" />
+            </ComboBox>
+
+            <TextBlock Text="SMTP host :" Margin="24 0 8 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSmtpHost" Width="180"/>
+
+            <TextBlock Text="Port :" Margin="24 0 8 0" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSmtpPort" Width="60" Text="587"/>
+
+            <CheckBox x:Name="chkUseSsl" Content="SSL/TLS" IsChecked="True" Margin="24 0 0 0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Formulaire -->
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Votre adresse e-mail :" Grid.Row="0" Grid.Column="0" Margin="0 0 8 8" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSenderEmail" Grid.Row="0" Grid.Column="1" Margin="0 0 0 8"/>
+
+            <TextBlock Text="Mot de passe (mot de passe d’application) :" Grid.Row="1" Grid.Column="0" Margin="0 0 8 8" VerticalAlignment="Center"/>
+            <PasswordBox x:Name="pwdAppPassword" Grid.Row="1" Grid.Column="1" Margin="0 0 0 8"/>
+
+            <TextBlock Text="Destinataire :" Grid.Row="2" Grid.Column="0" Margin="0 0 8 8" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtRecipientEmail" Grid.Row="2" Grid.Column="1" Margin="0 0 0 8"/>
+
+            <TextBlock Text="Objet :" Grid.Row="3" Grid.Column="0" Margin="0 0 8 8" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSubject" Grid.Row="3" Grid.Column="1" Margin="0 0 0 8"/>
+
+            <TextBlock Text="Message :" Grid.Row="4" Grid.Column="0" Margin="0 0 8 0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtBody" Grid.Row="4" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+        </Grid>
+
+        <!-- Boutons + statut -->
+        <DockPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" >
+                <Button x:Name="btnSend" Content="Envoyer" Width="120" Margin="8" Click="btnSend_Click"/>
+                <Button x:Name="btnTest" Content="Préremplir" Width="120" Margin="8" Click="btnTest_Click"/>
+            </StackPanel>
+            <StatusBar>
+                <StatusBarItem>
+                    <TextBlock x:Name="lblStatus" Text="Prêt."/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
     </Grid>
 </Window>
